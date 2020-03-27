@@ -9,18 +9,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'oshop';
+  title = 'OShop';
 
   constructor(private userService: UserService, private auth: AuthService, router: Router){
-    alert('app1');
+    //alert('app1');
     
     auth.user$.subscribe(user => {
       if (user){
-        alert('app2');
-        userService.save(user);
+        //alert('app2');
+        //console.log('app1-user'); console.log(user);
+        //userService.salvare(user); // for login with google
 
         let retUrl = localStorage.getItem('rtrUrl');
         router.navigateByUrl(retUrl);
+        //console.log('app2-returl'); console.log(retUrl);
       }
     })
   }

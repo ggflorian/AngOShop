@@ -1,16 +1,30 @@
 import { Injectable } from '@angular/core';
-import { CanActivate } from '@angular/router';
+import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+
+import { AuthService } from './auth.service';
+
+import { Observable } from 'rxjs';
+import { take, map, tap  } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
 
-  constructor() { }
+  // better: ng g guard services/auth
+  constructor(private auth: AuthService, private router: Router) { }
 
-  canActivate(route: import("@angular/router").ActivatedRouteSnapshot, state: import("@angular/router").RouterStateSnapshot): boolean | import("@angular/router").UrlTree | import("rxjs").Observable<boolean | import("@angular/router").UrlTree> | Promise<boolean | import("@angular/router").UrlTree> {
-    //throw new Error("Method not implemented.");
-    return true;
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    return this.auth.getUserState().pipe(
+      take(1), // complete the Observable after the first value is emitted
+      map(usr => !!usr), // <-- map to boolean
+      tap(loggedIn => {
+        if (!loggedIn){
+          console.log('no access');
+          this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
+        }
+      })
+    )
   }
 
 }

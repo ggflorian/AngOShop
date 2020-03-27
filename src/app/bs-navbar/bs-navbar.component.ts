@@ -12,11 +12,13 @@ export class BsNavbarComponent {
   appUser: AppUser;
 
   constructor(private auth: AuthService) { 
-    //this.appUser = { name: 'ggflorian', email: 'florian@yahoo.com', isAdmin: true };
+
+    this.auth.appUsr$.subscribe(au => this.appUser = au);
+
   }
 
   logout(): void {
-    alert('out');
+    this.auth.logout();
   }
 
 }

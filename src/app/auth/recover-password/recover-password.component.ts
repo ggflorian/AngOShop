@@ -20,8 +20,8 @@ export class RecoverPasswordComponent implements OnInit {
 
     if (this.emailInput != "")
     {
-      //this.auth.sendPassResetEmail(this.emailInput)
-      alert("Email has been sent to you. <br /> Please check and verify your mail-address.")
+      this.auth.sendPassResetEmail(this.emailInput)
+      alert("Email has been sent to you. Please check and verify your mail-address.")
     }
     else
       alert("Hey, please enter your email first");

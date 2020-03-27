@@ -4,13 +4,16 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
+//import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+
 import { environment } from 'src/environments/environment';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { RouterModule } from '@angular/router'
+
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth-guard.service';
 import { AdminAuthGuard } from './admin-auth-guard.service';
@@ -48,8 +51,11 @@ import { RecoverPasswordComponent } from './auth/recover-password/recover-passwo
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
+    //AngularFireDatabaseModule,
+    AngularFirestoreModule,
     AngularFireAuthModule,
+    //AngularFirestore, 
+    //AngularFirestoreDocument,
     NgbModule,
     FormsModule,
     RouterModule.forRoot([
@@ -59,7 +65,6 @@ import { RecoverPasswordComponent } from './auth/recover-password/recover-passwo
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'recover-password', component: RecoverPasswordComponent },
-
 
       { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuard] },
       { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard] },

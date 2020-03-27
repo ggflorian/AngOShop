@@ -18,8 +18,11 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  login(frm){
-    this.auth.login(frm.value.email, frm.value.password);
+  signIn(frm){
+     this.auth.signIn(frm.value.email, frm.value.password);
   }
 
+  login(){
+    this.auth.login();
+  }
 }

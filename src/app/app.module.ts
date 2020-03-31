@@ -31,7 +31,11 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './auth/register/register.component';
 import { RecoverPasswordComponent } from './auth/recover-password/recover-password.component';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { CategoryService } from './category.service';
+import { ProductService } from './product.service';
 
+// import { CustomFormsModule } from 'ng2-validation'
 
 @NgModule({
   declarations: [
@@ -46,10 +50,13 @@ import { RecoverPasswordComponent } from './auth/recover-password/recover-passwo
     AdminOrdersComponent,
     AdminProductsComponent,
     RegisterComponent,
-    RecoverPasswordComponent
+    RecoverPasswordComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
+    // CustomFormsModule,
+
     AngularFireModule.initializeApp(environment.firebase),
     //AngularFireDatabaseModule,
     AngularFirestoreModule,
@@ -76,6 +83,11 @@ import { RecoverPasswordComponent } from './auth/recover-password/recover-passwo
         canActivate: [AuthGuard, AdminAuthGuard] 
       },
       { 
+        path: 'admin/products/new', 
+        component: ProductFormComponent, 
+        canActivate: [AuthGuard, AdminAuthGuard] 
+      },
+      { 
         path: 'admin/orders', 
         component: AdminOrdersComponent, 
         canActivate: [AuthGuard, AdminAuthGuard] 
@@ -87,7 +99,9 @@ import { RecoverPasswordComponent } from './auth/recover-password/recover-passwo
     AuthService,
     AuthGuard,
     AdminAuthGuard,
-    UserService
+    UserService,
+    CategoryService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })

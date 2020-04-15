@@ -14,6 +14,7 @@ export class ProductFormComponent implements OnInit {
 
   categories$;
   categList: Category[];
+  catList: any[];
   product = {};
   id;
 
@@ -32,6 +33,8 @@ export class ProductFormComponent implements OnInit {
 
   ngOnInit(): void {
     //this.categList = this.categories$.subscribe(a)
+    this.categories$.subscribe(res => { console.log('nginit'); console.log(res); this.catList = res });
+    console.log('nginit1');console.log(this.catList);
   }
 
   save(product){

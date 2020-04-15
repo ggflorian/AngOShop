@@ -28,8 +28,8 @@
               <option value="bread">Bread</option>
               <option value="seasonings">Seasonings and Salts</option> -->
 
-              <option *ngFor="let c of categories$ | async" [value]="c.id">
-                {{ c.name }}
+              <option *ngFor="let c of catList" [value]="c.payload.doc.id">
+                {{ c.payload.doc.data().name }}
               </option> 
             </select>
             <div class="alert alert-danger" *ngIf="category.touched && category.invalid">Category is required.</div>

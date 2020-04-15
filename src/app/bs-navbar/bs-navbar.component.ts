@@ -12,9 +12,7 @@ export class BsNavbarComponent {
   appUser: AppUser;
 
   constructor(private auth: AuthService) { 
-
     this.auth.appUsr$.subscribe(au => this.appUser = au);
-
   }
 
   logout(): void {

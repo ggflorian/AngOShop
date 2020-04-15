@@ -3,6 +3,7 @@ import { ProductService } from 'src/app/product.service';
 import { CategoryService } from 'src/app/category.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators'
+import { Category } from 'src/app/models/category.model';
 
 @Component({
   selector: 'app-product-form',
@@ -12,6 +13,7 @@ import { take } from 'rxjs/operators'
 export class ProductFormComponent implements OnInit {
 
   categories$;
+  categList: Category[];
   product = {};
   id;
 
@@ -29,6 +31,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //this.categList = this.categories$.subscribe(a)
   }
 
   save(product){

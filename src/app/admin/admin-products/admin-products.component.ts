@@ -27,7 +27,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
         } as Product
       }));
 
-      this.listProd2 = this.productService.getAll().subscribe(data => this.listProd2 = data);
+      this.subscription2 = this.productService.getAll().subscribe(data => this.listProd2 = data);
   }
 
   ngOnInit(): void {
@@ -38,4 +38,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
     this.subscription2.unsubscribe();
   }
 
+  filter(){
+    
+  }
 }

@@ -92,7 +92,7 @@ import { ProductService } from './product.service';
         component: AdminProductsComponent, 
         canActivate: [AuthGuard, AdminAuthGuard] 
       },
-      
+
       { 
         path: 'admin/orders', 
         component: AdminOrdersComponent, 

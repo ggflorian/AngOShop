@@ -13,7 +13,6 @@ import { Category } from 'src/app/models/category.model';
 export class ProductFormComponent implements OnInit {
 
   categories$;
-  categList: Category[];
   catList: any[];
   product = {};
   id;
@@ -27,19 +26,17 @@ export class ProductFormComponent implements OnInit {
     this.categories$ = categoryService.getCategories();
 
     this.id = this.route.snapshot.paramMap.get('id');
-    console.log(this.id);
-    //if (this.id) this.productService.get2(this.id).take(1).subscribe(p => this.product = p);
+    //if (this.id) this.productService.get(this.id).take(1).subscribe(p => this.product = p);
   }
 
   ngOnInit(): void {
-    //this.categList = this.categories$.subscribe(a)
-    this.categories$.subscribe(res => { console.log('nginit'); console.log(res); this.catList = res });
-    console.log('nginit1');console.log(this.catList);
+    this.categories$.subscribe(res => { console.log('nginit-catList'); console.log(res); this.catList = res });
   }
 
   save(product){
     console.log(product);
     this.productService.create(product);
+    this.router.navigate(['/admin/products']);
   }
 
   delete(){

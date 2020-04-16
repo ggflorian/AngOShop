@@ -10,7 +10,7 @@ export class ProductService {
   constructor(private db: AngularFirestore) {}
   
   getAll(){
-    return this.db.collection('products');
+    return this.db.collection('products').snapshotChanges();
   }
 
   create(product){ 

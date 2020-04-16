@@ -1,3 +1,23 @@
 <p>
     <a routerLink="/admin/products/new" class="btn btn-primary">New Product</a>
 </p>
+
+<input #query (onkeyup)="filter()" placeholder="search..." />
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <td>Title</td>
+        <td>Price</td>
+        <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let p of listProd1">
+        <td>{{ p.title }}</td>
+        <td>{{ p.price }}</td>
+        <td>
+            <a routerLink="/admin/products/" + {{ p.id }}>Edit</a>
+        </td>
+    </tr>
+    </tbody>
+</table>

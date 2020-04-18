@@ -4,6 +4,7 @@ import { CategoryService } from 'src/app/category.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators'
 import { Category } from 'src/app/models/category.model';
+import { Product } from 'src/app/models/product.model';
 
 @Component({
   selector: 'app-product-form',
@@ -14,7 +15,7 @@ export class ProductFormComponent implements OnInit {
 
   categories$;
   catList: any[];
-  product = {};
+  product: Product = new Product();
   id;
 
   constructor(
@@ -26,7 +27,9 @@ export class ProductFormComponent implements OnInit {
     this.categories$ = categoryService.getCategories();
 
     this.id = this.route.snapshot.paramMap.get('id');
-    //if (this.id) this.productService.get(this.id).take(1).subscribe(p => this.product = p);
+    if (this.id){
+      this.productService.getProduct(this.id).subscribe(p => this.product = p); // use take(1) and async from task medium site
+    }
   }
 
   ngOnInit(): void {

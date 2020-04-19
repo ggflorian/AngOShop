@@ -15,12 +15,12 @@ export class ProductService {
     return this.db.collection('products').snapshotChanges();
   }
 
-  create(product){ 
-    return this.db.collection('/products').add(product);
+  add(product){ 
+    return this.db.collection('products').add(product);
   }
 
   get(productId){
-    return this.db.collection('/products/'+productId); // .doc(productId).get();
+    return this.db.collection('products/' + productId); // .doc(productId).get();
   }
 
   getProduct(pId) {
@@ -28,11 +28,18 @@ export class ProductService {
 
     this.db.collection('products').doc(pId).get().subscribe(
       next => {
-        s.next(next.data() as Product);
+        s.next({id:pId, ...next.data() as Product});
       }
     );
 
     return s as Observable<Product>;
   }
 
+  update(pId, product){
+    return this.db.collection('products').doc(pId).update(product);
+  }
+
+  delete(pId){
+    return this.db.collection('products').doc(pId).delete();
+  }
 }

@@ -28,7 +28,7 @@ export class ProductService {
 
     this.db.collection('products').doc(pId).get().subscribe(
       next => {
-        s.next({id:pId, ...next.data() as Product});
+        s.next( {id:pId, ...next.data() as Product} );
       }
     );
 

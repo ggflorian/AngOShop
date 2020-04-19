@@ -1,8 +1,9 @@
 <p>
     <a routerLink="/admin/products/new" class="btn btn-primary">New Product</a>
 </p>
-
-<input #query (onkeyup)="filter()" placeholder="search..." />
+<p>
+    <input #query (keyup)="filterList(query)" placeholder="search..." />
+</p>
 <table class="table table-hover">
     <thead class="thead-light">
     <tr>
@@ -16,8 +17,7 @@
         <td>{{ p.title }}</td>
         <td>{{ p.price }}</td>
         <td>
-            <a routerLink="/admin/products/{{ p.id }}">Edit1</a> | 
-            <a [routerLink]="['/admin/products/', p.id]">Edit2</a>
+            <a routerLink="/admin/products/{{ p.id }}">Edit</a>
         </td>
     </tr>
     </tbody>
@@ -38,8 +38,8 @@
         <td>{{ p.payload.doc.data().title }}</td>
         <td>{{ p.payload.doc.data().price }}</td>
         <td>
-            <a routerLink="/admin/products/{{ p.payload.doc.id }}">Edit3</a> | 
-            <a [routerLink]="['/admin/products/', p.payload.doc.id]">Edit4</a>
+            <a routerLink="/admin/products/{{ p.payload.doc.id }}">Edit1</a> | 
+            <a [routerLink]="['/admin/products/', p.payload.doc.id]">Edit2</a>
         </td>
     </tr>
     </tbody>

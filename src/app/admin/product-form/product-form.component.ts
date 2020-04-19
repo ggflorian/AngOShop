@@ -5,6 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators'
 import { Category } from 'src/app/models/category.model';
 import { Product } from 'src/app/models/product.model';
+import { Observable } from 'rxjs';
+import { DocumentChangeAction } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-product-form',
@@ -13,10 +15,10 @@ import { Product } from 'src/app/models/product.model';
 })
 export class ProductFormComponent implements OnInit {
 
-  categories$;
+  categories$: any;
   catList: any[];
   product: Product = new Product();
-  id;
+  id:string;
 
   constructor(
     private productService: ProductService,
@@ -28,12 +30,12 @@ export class ProductFormComponent implements OnInit {
 
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id){
-      this.productService.getProduct(this.id).subscribe(p => this.product = p); // use take(1) and async from task medium site
+      this.productService.getProduct(this.id).pipe(take(1)).subscribe(p => this.product = p); // use take(1) and async from task medium site
     }
   }
 
   ngOnInit(): void {
-    this.categories$.subscribe(res => { console.log('nginit-catList'); console.log(res); this.catList = res });
+    this.categories$.subscribe(res => this.catList = res ); /* console.log('nginit-catList'); console.log(res); }); */ //
   }
 
   save(product){
@@ -47,7 +49,7 @@ export class ProductFormComponent implements OnInit {
 
   delete(){
     if (!confirm('Are you sure you want to delete this record?')) return 
-    
+
     this.productService.delete(this.id);
     this.router.navigate(['/admin/products']);
   }

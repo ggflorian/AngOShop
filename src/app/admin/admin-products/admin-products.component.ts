@@ -13,6 +13,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
 
   listProd1: Product[];
   listProd2;
+  filteredProducts: Product[];
 
   subscription1: Subscription;
   subscription2: Subscription;
@@ -20,7 +21,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   constructor(private productService: ProductService) { 
 
     this.subscription1 = this.productService.getAll().subscribe(data => 
-      this.listProd1 = data.map(e => {
+      this.filteredProducts = this.listProd1 = data.map(e => {
         return {
           id: e.payload.doc.id,
           ...e.payload.doc.data() as Product
@@ -38,7 +39,9 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
     this.subscription2.unsubscribe();
   }
 
-  filter(){
-    
+  filterList(inputQuery){
+    this.filteredProducts = (inputQuery) ? 
+      this.listProd1.filter(p => p.title.toLowerCase().includes(inputQuery.toLowerCase())) :
+      this.listProd1;
   }
 }

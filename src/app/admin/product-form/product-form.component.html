@@ -51,7 +51,7 @@
         <img class="card-img-top" [src]="imageUrl.value">
         <div class="card-body">
           <h4 class="card-title">{{ title.value }}</h4>
-          <p class="card-text">{{ price.value | currency:'USD':true }}</p>
+          <p class="card-text">{{ price.value | currency:'USD':'symbol' }}</p>
         </div>
       </div>
       <!-- <div *ngIf="product.title" class="card" style="width: 20rem;">

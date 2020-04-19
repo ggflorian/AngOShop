@@ -18,7 +18,7 @@ export class AdminAuthGuard implements CanActivate {
       take(1),
       map(usr => usr.isAdmin),
       tap(loggedIn => {
-        console.log('admin-guard1=>loggedIn'); console.log(loggedIn);
+        //console.log('admin-guard1=>loggedIn'); console.log(loggedIn);
         if (!loggedIn){
           console.log('no rights here');
           this.router.navigate(['/my/orders']);

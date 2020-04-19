@@ -25,7 +25,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
         return {
           id: e.payload.doc.id,
           ...e.payload.doc.data() as Product
-        } as Product
+        }
       }));
 
       this.subscription2 = this.productService.getAll().subscribe(data => this.listProd2 = data);
@@ -39,7 +39,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
     this.subscription2.unsubscribe();
   }
 
-  filterList(inputQuery){
+  filterList(inputQuery: string){
     this.filteredProducts = (inputQuery) ? 
       this.listProd1.filter(p => p.title.toLowerCase().includes(inputQuery.toLowerCase())) :
       this.listProd1;

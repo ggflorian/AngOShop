@@ -39,7 +39,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   save(product){
-    console.log(product);
+    // console.log(product); // why not id on edit?
 
     if (!this.id) this.productService.add(product);
     else this.productService.update(this.id, product);
